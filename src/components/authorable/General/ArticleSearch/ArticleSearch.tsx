@@ -26,7 +26,6 @@ type articleListType = {
 };
 
 interface Fields {
-  text?: Field<string>;
   variant: Field<string>;
   articleList: articleListType[];
   description: RichTextField;
@@ -182,7 +181,7 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
           </button>
         </div>
 
-        {fields.articleList.length == 0 && <h1>No articles found</h1>}
+        {/* {fields.articleList.length == 0 && <h1>No articles found</h1>} */}
 
         <div className="mt-5">
           {/* General Case */}
