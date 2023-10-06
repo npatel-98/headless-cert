@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  class="bg-theme-bg border border-b-4 border-b-primary border-black dark:border-gray dark:border-b-primary max-w-lg p-2 rounded"
+  data-component="authorable/general/contentblock"
+  data-testid="contentblock"
+>
+  <p
+    class="font-bold"
+  >
+    ContentBlock
+  </p>
+  <div
+    class="rte"
+    data-testid="contentblock"
+  >
+    <p>
+      This is 
+      <em>
+        richtext
+      </em>
+       content to show the 
+      <strong>
+        simplest
+      </strong>
+       possible example of a implementaiton possible.
+    </p>
+  </div>
+</div>
+`;
