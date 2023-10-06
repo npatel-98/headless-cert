@@ -6,7 +6,7 @@ import RichTextA11yWrapper from 'components/helpers/RichTextA11yWrapper/RichText
 import clsx from 'clsx';
 
 import FontAwesomeIcon from 'components/helpers/FontAwesomeIcon/FontAwesomeIcon';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 // Ideally, all this is from generated Typescript code from Sitecore and we're not manually defining types.
 import SearchBar from './SearchBar';
 
@@ -47,48 +47,34 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
   const [showResults, setShowResults] = useState(false);
   const [showResponse, setShowResponse]: any[] = useState([]);
 
+  const searchInput:any = useRef('');
+
   const handleSearch = (val: string) => {
-    setInputValue(val);
-    console.log('searched for :', val);
+    const inputRefValue = searchInput.current.value;
+    console.log('searchInput:', inputRefValue);
+    performSearch(searchInput.current.value, true);
+    
   };
 
   const handleReset = () => {
     console.log('reset');
     setInputValue('');
+    setShowResults(false);
+    setShowResponse([]);
   };
 
   const triggerSearch = (event: any) => {
     const value = event.target.value;
-    // if (value.trim.length > 0) {
-    console.log('value.trim.length: ', value.length);
-    if (value.length > 2) {
-      setShowResults(true);
-    } else {
-      setShowResults(false);
-    }
-    
-    setInputValue(value);
-    const results = searchInFields(value, fields.articleList);
-    setShowResponse(results);
-    console.log(' Searching :', value);
-    console.log(' RES :', results);
+    console.log('value.length: ', value.length);
+    performSearch(value);
 
-    // Filter the array based on the given set of indexes
-    const filteredArticles = fields.articleList.filter((item, index) => results.includes(index));
-    console.log('Filtered RESP : ', filteredArticles);
-    setShowResponse(filteredArticles);
-
-    
   };
 
-  // useEffect(() => {
-  //   // trigger re-render of articles list
-  // }, [inputValue])
 
-  function searchInFields(searchTerm: string, fieldsObject: any) {
+  function generalSearch(searchTerm: string, fieldsObject: any) {
     const matches: any[] = [];
 
-    const res = fieldsObject.map((item: any, index: any) => {
+    fieldsObject.map((item: any, index: any) => {
       const searchCondition =
         item.fields.discipline.value.toLowerCase().match(searchTerm.toLowerCase()) ||
         item.fields.jobTitle.value.toLowerCase().match(searchTerm.toLowerCase()) ||
@@ -102,12 +88,43 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
     return matches;
   }
 
+  // search functionality and filer list functionality:
+  const performSearch = (searchString: string, onForceSearch?:boolean) => {
+
+    if (searchString.length > 2) {
+      setShowResults(true);
+    } else {
+      setShowResults(false);
+    }
+
+    if(onForceSearch){
+      setShowResults(true);
+    }
+
+    setInputValue(searchString);
+    const matchResults = generalSearch(searchString, fields.articleList);
+    // setShowResponse(matchResults);
+
+    // Filter the array based on the given set of indexes
+    const filteredArticles = fields.articleList.filter((item, index) =>
+      matchResults.includes(index)
+    );
+    console.log('Filtered RESP : ', filteredArticles);
+    setShowResponse(filteredArticles);
+  }
+
 
   const getArticlesList = (dataArray: any) => {
+
+    // For no data found:
+    if (dataArray.length == 0){
+      return <h2>No articles found!</h2>
+    }
+
+    // response from 
     const responseList = dataArray.map((data: any, index: any) => {
       return (
         <ul key={index} className="border border-t-0 border-l-0 border-r-0 border-b-slate-200">
-          {/* <p>hello</p> */}
           <li className="border-2 border-neutral-300 py-4 px-2 my-4">
             <h2>{data.fields.jobTitle.value}</h2>
             <h4>{data.fields.discipline.value}</h4>
@@ -122,7 +139,11 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
   useEffect(() => {
     console.log('showResults: ', showResults);
     console.log('showResponse: ', showResponse);
-  }, [showResponse])
+    console.log('inputValue: ', inputValue);
+    if(!inputValue){
+      // setShowResponse(false)
+    }
+  }, [showResponse, inputValue]);
   
   
 
@@ -142,17 +163,15 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
         />
         {/* SearchBar here  */}
         <div className="m-4 flex items-center justify-around bg-theme-bg border-2 border-black dark:border-gray max-w-lg p-2 rounded">
-          <button
-          // onClick={handleSearch}
-          >
+          <button onClick={handleSearch}>
             <FontAwesomeIcon icon="search" />
           </button>
 
           <input
             className="w-4/5 border-1 hover:bg-violet-100 hover:bg-violet-100 focus:bg-violet-100"
-            // onChange={triggerSearch}
             value={inputValue}
-            onChange={triggerSearch}
+            onChange={triggerSearch} 
+            ref={searchInput}
           ></input>
 
           <button onClick={handleReset}>
@@ -163,20 +182,11 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
         {fields.articleList.length == 0 && <h1>No articles found</h1>}
 
         <div className="mt-5">
+          {/* General Case */}
           {!showResults && getArticlesList(fields.articleList)}
 
+          {/* Upon Search  */}
           {showResults && getArticlesList(showResponse)}
-
-          {showResults &&
-            showResponse.map((resultIndex: any) => {
-              fields.articleList.map((data: any, index: any) => {
-                if (resultIndex === index) {
-                  return <p>In condi</p>;
-                } else {
-                  return null;
-                }
-              });
-            })}
         </div>
       </div>
     </>
