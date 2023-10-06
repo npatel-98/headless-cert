@@ -45,12 +45,12 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
 
   const [inputValue, setInputValue] = useState('');
   const [showResults, setShowResults] = useState(false);
-  const [ showResponse, setShowResponse ]: any[] = useState([])
+  const [showResponse, setShowResponse]: any[] = useState([]);
 
-  const handleSearch = (val:string) => {
+  const handleSearch = (val: string) => {
     setInputValue(val);
-    console.log("searched for :",val)
-  }
+    console.log('searched for :', val);
+  };
 
   const handleReset = () => {
     console.log('reset');
@@ -60,45 +60,71 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
   const triggerSearch = (event: any) => {
     const value = event.target.value;
     // if (value.trim.length > 0) {
-      setInputValue(value);
-      const results = searchInFields(value, fields.articleList)
-      setShowResponse(results);
-      console.log(' Searching :', value);
-      console.log(' RES :', results);
-    // }
-
-    if(value.trim.length > 2){
+    console.log('value.trim.length: ', value.length);
+    if (value.length > 2) {
       setShowResults(true);
-    }else{
-      setShowResults(false)
+    } else {
+      setShowResults(false);
     }
+    
+    setInputValue(value);
+    const results = searchInFields(value, fields.articleList);
+    setShowResponse(results);
+    console.log(' Searching :', value);
+    console.log(' RES :', results);
+
+    // Filter the array based on the given set of indexes
+    const filteredArticles = fields.articleList.filter((item, index) => results.includes(index));
+    console.log('Filtered RESP : ', filteredArticles);
+    setShowResponse(filteredArticles);
+
+    
   };
 
   // useEffect(() => {
   //   // trigger re-render of articles list
   // }, [inputValue])
 
-  function searchInFields(searchTerm:string, fieldsObject:any) {
+  function searchInFields(searchTerm: string, fieldsObject: any) {
     const matches: any[] = [];
 
-    console.log('this is sexarch term: ', searchTerm.toLowerCase());
-    const res = fieldsObject.map( (item:any, index:any) => {
-
-    const searchCondition =
-      item.fields.discipline.value.toLowerCase().match(searchTerm.toLowerCase()) ||
-      item.fields.jobTitle.value.toLowerCase().match(searchTerm.toLowerCase()) ||
-      item.fields.location.value.toLowerCase().match(searchTerm.toLowerCase());
+    const res = fieldsObject.map((item: any, index: any) => {
+      const searchCondition =
+        item.fields.discipline.value.toLowerCase().match(searchTerm.toLowerCase()) ||
+        item.fields.jobTitle.value.toLowerCase().match(searchTerm.toLowerCase()) ||
+        item.fields.location.value.toLowerCase().match(searchTerm.toLowerCase());
 
       if (searchCondition) {
         matches.push(index);
       }
-    })
+    });
 
     return matches;
   }
 
-  
 
+  const getArticlesList = (dataArray: any) => {
+    const responseList = dataArray.map((data: any, index: any) => {
+      return (
+        <ul key={index} className="border border-t-0 border-l-0 border-r-0 border-b-slate-200">
+          {/* <p>hello</p> */}
+          <li className="border-2 border-neutral-300 py-4 px-2 my-4">
+            <h2>{data.fields.jobTitle.value}</h2>
+            <h4>{data.fields.discipline.value}</h4>
+            <h6>{data.fields.location.value}</h6>
+          </li>
+        </ul>
+      );
+    });
+    return responseList;
+  };
+
+  useEffect(() => {
+    console.log('showResults: ', showResults);
+    console.log('showResponse: ', showResponse);
+  }, [showResponse])
+  
+  
 
   return (
     <>
@@ -137,25 +163,9 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
         {fields.articleList.length == 0 && <h1>No articles found</h1>}
 
         <div className="mt-5">
-          {!showResults &&
-            fields.articleList.map((data: any, index: any) => {
-              // {
-              //   console.log('data: ', data.fields.discipline);
-              // }
-              return (
-                <ul
-                  key={index}
-                  className="border border-t-0 border-l-0 border-r-0 border-b-slate-200"
-                >
-                  {/* <p>hello</p> */}
-                  <li className="border-2 border-neutral-300 py-4 px-2 my-4">
-                    <h2>{data.fields.jobTitle.value}</h2>
-                    <h4>{data.fields.discipline.value}</h4>
-                    <h6>{data.fields.location.value}</h6>
-                  </li>
-                </ul>
-              );
-            })}
+          {!showResults && getArticlesList(fields.articleList)}
+
+          {showResults && getArticlesList(showResponse)}
 
           {showResults &&
             showResponse.map((resultIndex: any) => {
