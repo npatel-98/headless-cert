@@ -1,8 +1,8 @@
-import { ArticleSearchProps } from './ArticleSearch';
+import { ArticleWithSearchProps } from './ArticleWithSearch';
 
 // Realistically this is going to have a lot more data from Sitecore or XM Cloud, but this is a good example mock data set.
-const defaultData: ArticleSearchProps = {
-  rendering: { componentName: 'ArticleSearch' },
+const defaultData: ArticleWithSearchProps = {
+  rendering: { componentName: 'ArticleWithSearch' },
   params: {},
   fields: {
     variant: {

@@ -8,7 +8,6 @@ import clsx from 'clsx';
 import FontAwesomeIcon from 'components/helpers/FontAwesomeIcon/FontAwesomeIcon';
 import { useState, useEffect, useRef } from 'react';
 // Ideally, all this is from generated Typescript code from Sitecore and we're not manually defining types.
-import SearchBar from './SearchBar';
 
 type articleCardDetail = {
   discipline: Field<string>;
@@ -32,13 +31,13 @@ interface Fields {
   title: Field<string>;
 }
 
-export type ArticleSearchProps = {
+export type ArticleWithSearchProps = {
   rendering: { componentName: string };
   params: { [key: string]: string };
   fields: Fields;
 };
 
-const ArticleWithSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
+const ArticleWithSearch = ({ fields }: ArticleWithSearchProps): JSX.Element => {
   // Fail out if fields aren't present
   if (fields === null || fields === undefined) return <></>;
 
@@ -195,5 +194,5 @@ const ArticleWithSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
 };
 
 // @todo: Figure out how to mock isPageEditing, or if it even matters, in Storybook.
-// export default withDatasourceCheck()<ArticleSearchProps>(ArticleSearch);
+// export default withDatasourceCheck()<ArticleWithSearchProps>(ArticleSearch);
 export default ArticleWithSearch;

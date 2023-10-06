@@ -1,0 +1,343 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  class="bg-theme-bg border border-b-4 border-b-primary border-black dark:border-gray dark:border-b-primary max-w-lg p-2 rounded bg-pink-50"
+  data-component="authorable/general/ArticleSearch"
+  data-testid="ArticleSearch"
+>
+  <h1
+    class="font-bold text-center"
+  >
+    Careers
+  </h1>
+  <div
+    class="rte"
+    data-testid="ArticleSearch"
+  >
+    <p>
+      We invest in people who add to our expertise, empathy and ingenuity.
+    </p>
+  </div>
+  <div
+    class="m-4 flex items-center justify-around bg-theme-bg border-2 border-black dark:border-gray max-w-lg p-2 rounded bg-white "
+  >
+    <button />
+    <input
+      class="w-4/5 border-1 bg-sky-100 hover:bg-violet-100 hover:bg-violet-100 focus:bg-violet-100 px-3 py-1 rounded"
+      value=""
+    />
+    <button />
+  </div>
+  <div
+    class="mt-5"
+  >
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Accounts Executive (Client Invoicing & Accounts Receivable)
+        </h2>
+        <h4>
+          Human Resources and Accounting
+        </h4>
+        <h6>
+          Bengaluru-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Associate Mobile App Developer
+        </h2>
+        <h4>
+          Web and Application Development
+        </h4>
+        <h6>
+          Vadodara-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Associate Sitecore Developer
+        </h2>
+        <h4>
+          Web and Application Development
+        </h4>
+        <h6>
+          Bengaluru-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Digital Strategist
+        </h2>
+        <h4>
+          Digital Strategy
+        </h4>
+        <h6>
+          Remote - US
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Jira Admin
+        </h2>
+        <h4>
+          Web and Application Development
+        </h4>
+        <h6>
+          Vadodara-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Mobile App Developer
+        </h2>
+        <h4>
+          Web and Application Development
+        </h4>
+        <h6>
+          Vadodara-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Salesforce Business Architect
+        </h2>
+        <h4>
+          Salesforce
+        </h4>
+        <h6>
+          Dubai-AE
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Salesforce Developer
+        </h2>
+        <h4>
+          Salesforce
+        </h4>
+        <h6>
+          Jaipur-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Salesforce Functional Lead
+        </h2>
+        <h4>
+          Salesforce
+        </h4>
+        <h6>
+          Jaipur-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Salesforce Intern
+        </h2>
+        <h4>
+          Salesforce
+        </h4>
+        <h6>
+          Jaipur-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Salesforce Marketing Cloud Consultant
+        </h2>
+        <h4>
+          Salesforce
+        </h4>
+        <h6>
+          Jaipur-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Salesforce QA Consultant
+        </h2>
+        <h4>
+          Salesforce
+        </h4>
+        <h6>
+          Vadodara-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Senior Mobile App Developer
+        </h2>
+        <h4>
+          Web and Application Development
+        </h4>
+        <h6>
+          Vadodara-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Senior Project Manager
+        </h2>
+        <h4>
+          Digital Strategy
+        </h4>
+        <h6>
+          Vadodara-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Salesforce Developer
+        </h2>
+        <h4>
+          Salesforce
+        </h4>
+        <h6>
+          Vadodara-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Senior Sitecore Developer
+        </h2>
+        <h4>
+          Web and Application Development
+        </h4>
+        <h6>
+          Bengaluru-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Service Desk Technician
+        </h2>
+        <h4>
+          Web and Application Development
+        </h4>
+        <h6>
+          Vadodara-IN
+        </h6>
+      </li>
+    </ul>
+    <ul
+      class="border border-t-0 border-l-0 border-r-0 bg-white"
+    >
+      <li
+        class="border-2 border-neutral-300 py-4 px-2"
+      >
+        <h2>
+          Sitecore Developer
+        </h2>
+        <h4>
+          Web and Application Development
+        </h4>
+        <h6>
+          Bengaluru-IN
+        </h6>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
