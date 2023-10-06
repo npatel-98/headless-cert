@@ -29,14 +29,7 @@ const SearchBar = ({ fields }: SearchBarProps): JSX.Element => {
 
   return (
     <>
-      <div
-        className="bg-theme-bg border border-b-4 border-b-primary border-black dark:border-gray dark:border-b-primary max-w-lg p-2 rounded"
-        data-component="authorable/general/SearchBar"
-        data-testid="SearchBar"
-      >
-        <input placeholder='search here'></input>
-
-      </div>
+      
 
     </>
   );

@@ -49,6 +49,7 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
 
   const searchInput:any = useRef('');
 
+  // Search icon click
   const handleSearch = (val: string) => {
     const inputRefValue = searchInput.current.value;
     console.log('searchInput:', inputRefValue);
@@ -56,6 +57,7 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
     
   };
 
+  // Clear icon click
   const handleReset = () => {
     console.log('reset');
     setInputValue('');
@@ -63,14 +65,22 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
     setShowResponse([]);
   };
 
+  //  input onChange handler
   const triggerSearch = (event: any) => {
     const value = event.target.value;
-    console.log('value.length: ', value.length);
     performSearch(value);
-
   };
 
+  const handleKeyDown = (event:any) => {
+    var code = event.keyCode ? event.keyCode : event.which;
 
+    if (code == 13) { // upon "enter" key
+      const inputRefValue = searchInput.current.value;
+      performSearch(inputRefValue, true);
+    }
+  }
+  
+  // search match functionality:
   function generalSearch(searchTerm: string, fieldsObject: any) {
     const matches: any[] = [];
 
@@ -91,29 +101,28 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
   // search functionality and filer list functionality:
   const performSearch = (searchString: string, onForceSearch?:boolean) => {
 
-    if (searchString.length > 2) {
+    if (searchString.length >= 3) {
       setShowResults(true);
     } else {
       setShowResults(false);
     }
 
-    if(onForceSearch){
+    if(onForceSearch){  // for icon search
       setShowResults(true);
     }
 
     setInputValue(searchString);
     const matchResults = generalSearch(searchString, fields.articleList);
-    // setShowResponse(matchResults);
 
     // Filter the array based on the given set of indexes
     const filteredArticles = fields.articleList.filter((item, index) =>
       matchResults.includes(index)
     );
-    console.log('Filtered RESP : ', filteredArticles);
     setShowResponse(filteredArticles);
   }
 
 
+  // Get refine articles List
   const getArticlesList = (dataArray: any) => {
 
     // For no data found:
@@ -122,7 +131,7 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
     }
 
     // response from 
-    const responseList = dataArray.map((data: any, index: any) => {
+    const finalArticlesList = dataArray.map((data: any, index: any) => {
       return (
         <ul key={index} className="border border-t-0 border-l-0 border-r-0 border-b-slate-200">
           <li className="border-2 border-neutral-300 py-4 px-2 my-4">
@@ -133,19 +142,8 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
         </ul>
       );
     });
-    return responseList;
+    return finalArticlesList;
   };
-
-  useEffect(() => {
-    console.log('showResults: ', showResults);
-    console.log('showResponse: ', showResponse);
-    console.log('inputValue: ', inputValue);
-    if(!inputValue){
-      // setShowResponse(false)
-    }
-  }, [showResponse, inputValue]);
-  
-  
 
   return (
     <>
@@ -163,17 +161,22 @@ const ArticleSearch = ({ fields }: ArticleSearchProps): JSX.Element => {
         />
         {/* SearchBar here  */}
         <div className="m-4 flex items-center justify-around bg-theme-bg border-2 border-black dark:border-gray max-w-lg p-2 rounded">
+          {/* Search Icon */}
           <button onClick={handleSearch}>
             <FontAwesomeIcon icon="search" />
           </button>
 
+          {/* Input Field */}
           <input
-            className="w-4/5 border-1 hover:bg-violet-100 hover:bg-violet-100 focus:bg-violet-100"
+            className="w-4/5 border-1 hover:bg-violet-100 hover:bg-violet-100 focus:bg-violet-100 px-3 py-1"
             value={inputValue}
+            // onFocus={checkFocus}
             onChange={triggerSearch} 
+            onKeyDown={handleKeyDown}
             ref={searchInput}
           ></input>
 
+          {/* Reset Icon */}
           <button onClick={handleReset}>
             <FontAwesomeIcon icon="close" />
           </button>
