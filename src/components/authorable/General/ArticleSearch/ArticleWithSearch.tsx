@@ -1,5 +1,5 @@
 // import { Field, withDatasourceCheck } from '@sitecore-jss/sitecore-jss-nextjs';
-import { Field, RichTextField } from '@sitecore-jss/sitecore-jss-nextjs';
+import { Field, RichTextField, Text } from '@sitecore-jss/sitecore-jss-nextjs';
 
 // Local
 import RichTextA11yWrapper from 'components/helpers/RichTextA11yWrapper/RichTextA11yWrapper';
@@ -20,8 +20,8 @@ type articleListType = {
   url?: string;
   name?: string;
   displayName?: string;
-  // fields?: articleCardDetail[];
-  fields?: any;
+  fields?: articleCardDetail[];
+  // fields?: any;
 };
 
 interface Fields {
@@ -29,6 +29,7 @@ interface Fields {
   articleList: articleListType[];
   description: RichTextField;
   title: Field<string>;
+  noResultMessage: Field<string>;
 }
 
 export type ArticleWithSearchProps = {
@@ -122,8 +123,14 @@ const ArticleWithSearch = ({ fields }: ArticleWithSearchProps): JSX.Element => {
   // Get refine articles List
   const getArticlesList = (dataArray: any) => {
     // For no data found:
-    if (dataArray.length == 0) {
-      return <h2>No articles found!</h2>;
+    if ( !dataArray || dataArray.length == 0) {
+      return (
+        <Text
+          className={'text-xl font-normal leading-normal mt-0 mb-2 text-black-800'}
+          tag="h2"
+          field={fields.noResultMessage}
+        />
+      );
     }
 
     // response from
@@ -131,9 +138,23 @@ const ArticleWithSearch = ({ fields }: ArticleWithSearchProps): JSX.Element => {
       return (
         <ul key={index} className="border border-t-0 border-l-0 border-r-0 bg-white">
           <li className="border-2 border-neutral-300 py-4 px-2" key={index}>
-            <h2>{data.fields.jobTitle.value}</h2>
-            <h4>{data.fields.discipline.value}</h4>
-            <h6>{data.fields.location.value}</h6>
+            <div>
+              <Text
+              className={'text-xl font-normal leading-normal mt-0 mb-2'}
+              tag="h3"
+              field={data.fields.jobTitle}
+              />
+              <Text
+                className={' text-l font-normal leading-normal mt-0 mb-2'}
+                tag="h4"
+                field={data.fields.discipline}
+              />
+              <Text
+                className={'text-md font-normal leading-normal mt-0 mb-2 text-blue-500'}
+                tag="h5"
+                field={data.fields.location}
+              />
+            </div>
           </li>
         </ul>
       );
@@ -148,7 +169,7 @@ const ArticleWithSearch = ({ fields }: ArticleWithSearchProps): JSX.Element => {
         data-component="authorable/general/ArticleSearch"
         data-testid="ArticleSearch"
       >
-        <h1 className="font-bold text-center">{fields.title.value}</h1>
+        <Text className={'text-xl font-bold text-center mt-0 mb-3'} tag="h3" field={fields.title} />
         <RichTextA11yWrapper
           className="text-center"
           data-testid="ArticleSearch"

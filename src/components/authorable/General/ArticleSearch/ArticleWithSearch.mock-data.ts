@@ -322,6 +322,9 @@ const defaultData: ArticleWithSearchProps = {
     title: {
       value: 'Careers',
     },
+    noResultMessage: {
+      value: "No articles found!"
+    }
   },
 };
 
